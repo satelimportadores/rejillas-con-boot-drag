@@ -10,12 +10,18 @@ asig_mesas();
       drop: function( event, ui ) {
           var i;
           i = $( this ).find('img').attr('id');
-          console.log(i);
+           //console.log(i);
+
+//INSERTAR O MODIFICAR MESA
           if (!i) {
             $( this ).html(ui.draggable); 
             identificador_mesa = $( this ).find('img').attr('id');
             id_td = $(this).attr('id');
-            console.log(id_td);
+              //console.log(id_td);
+                  //modal pedir nombre mesa,descripcion, cant sillas
+                      $('#Modal_insertar').modal('show');
+                      $('.modal_insertar_title').html('Insertar mesa: '+identificador_mesa+' en: '+id_td);
+                  //modal pedir nombre mesa,descripcion, cant sillas
               //envio php
                 $.ajax({
                   url: 'php/e_mesas.php',
@@ -29,6 +35,8 @@ asig_mesas();
                 
               //envio php
           }
+//INSERTAR O MODIFICAR MESA
+
           
         }
     });
@@ -36,8 +44,10 @@ asig_mesas();
 
     //Borrar mesas
     	 $("#rejilla").on("click", "td img", function() {
-         identificador_mesa = $( this ).attr('id');
-         console.log(identificador_mesa);
+          identificador_mesa = $( this ).attr('id');
+          $('#Modal_borrar').modal('show');
+          $('.modal_borrar_title').html('Eliminar mesa');
+            $('.modal_borrar_content').html('Desea eliminar la mesa con id: '+identificador_mesa);
        });
     //Borrar mesas
 
@@ -52,7 +62,7 @@ asig_mesas();
         }).done(function(data){
           data = parseInt(data);
           var idmesa = data + 1;
-          alert(idmesa);
+           // alert(idmesa);
           $("#mesas").append('<img id="'+idmesa+'" class="draggable ui-widget-content" src="images/mesita01.png" alt="">');
           $( ".draggable" ).draggable({ helper:'clone'});
         });
@@ -61,7 +71,12 @@ asig_mesas();
      
    });
     //Crear mesas
+
+
 });
+
+
+//FUNCIONES:
 
 var asig_mesas = function(){
         $.ajax({

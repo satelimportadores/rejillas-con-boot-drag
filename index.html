@@ -18,23 +18,8 @@
 	</div>
 </div>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+
 		<div class="row" style="border:solid 1px">
 			<div id="containment-wrapper" class="col-md-12" style="border:solid green 1px">
 
@@ -170,11 +155,84 @@
 				</table>
 			</div>
 		</div>
+
 		<div id="content">
 			
 		</div>
+
+<!-- INSERTAR MESA borrar mesa -->
+<div class="modal fade" id="Modal_insertar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title modal_insertar_title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body modal_insertar_content">
+        <form class="form-horizontal" action="" role="form">
+        	
+        	
+  				<div class="form-group">
+				    <label for="nombre_mesa" class="col-lg-2 control-label">Nombre mesa</label>
+				    <div class="col-lg-10">
+				      <input type="text" class="form-control" id="nombre_mesa" placeholder="nombre de la mesa">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="desc_mesa" class="col-lg-2 control-label">Descripcion de la mesa</label>
+				    <div class="col-lg-10">
+				      <input type="text" class="form-control" id="desc_mesa" placeholder="Descripcion de la mesa">
+				    </div>
+				  </div>
+
+				  <div class="form-group">
+						<label for="numero_sillas" class="col-lg-2 control-label">Cantidad de sillas</label>
+				    <div class="col-lg-offset-2 col-lg-10">
+							<select class="form-control" name="numero_sillas">
+							  <option>1</option>
+							  <option>2</option>
+							  <option>3</option>
+							  <option>4</option>
+							  <option>5</option>
+							</select>
+				    </div>
+				  </div>
+
+        
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- INSERTAR MESA borrar mesa -->
+
+<!-- modal borrar mesa -->
+<div class="modal fade" id="Modal_borrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title modal_borrar_title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body modal_borrar_content">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal borrar mesa -->
+
 <script src="js/jquery.js"></script>
 <script src="js/jqueryUI.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <script src="js/index.js"></script>
 </body>
 </html>
