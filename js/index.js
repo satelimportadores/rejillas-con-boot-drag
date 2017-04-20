@@ -1,36 +1,34 @@
-var idmesa = 0;
-var i;
+
 $(document).ready(function() {
+
+  
+asig_mesas();
 
 //Celda recibe dropable
 	$("td").droppable({
+      
       drop: function( event, ui ) {
+          var i;
           i = $( this ).find('img').attr('id');
           console.log(i);
           if (!i) {
             $( this ).html(ui.draggable); 
             identificador_mesa = $( this ).find('img').attr('id');
-            columna = this.cellIndex;
-            fila = this.parentNode.rowIndex;
-            console.log(identificador_mesa+' '+fila+' '+columna);
+            id_td = $(this).attr('id');
+            console.log(id_td);
               //envio php
                 $.ajax({
-                  url: 'php/mesas.php',
+                  url: 'php/e_mesas.php',
                   type: 'POST',
-                  data: {'id_mesa': identificador_mesa,'position_columna':columna,'position_fila':fila},
+                  data: {'insmodmesa':'insmodmesa','id_mesa': identificador_mesa,'id_td':id_td},
                 })
                 .done(function(data) {
                   console.log(data);
                 })
-                .fail(function(data) {
-                  console.log(data);
-                })
-                .always(function(data) {
-                  console.log(data);
-                });
+
                 
               //envio php
-          };
+          }
           
         }
     });
@@ -45,12 +43,61 @@ $(document).ready(function() {
 
     //Crear mesas
    $("#addmesa").on('click',function() {
-    idmesa++;
-     $("#mesas").append('<img id="'+idmesa+'" class="draggable ui-widget-content" src="images/mesita01.png" alt="">');
-     $( ".draggable" ).draggable({ helper:'clone'});
+      idmesa = 0;
+      //mostar ultimo id
+        $.ajax({
+          type:"POST",
+          url:"php/consulta_mesas.php",
+          data: {'cons_id_mesas': 'cons_id_mesas'},
+        }).done(function(data){
+          data = parseInt(data);
+          var idmesa = data + 1;
+          alert(idmesa);
+          $("#mesas").append('<img id="'+idmesa+'" class="draggable ui-widget-content" src="images/mesita01.png" alt="">');
+          $( ".draggable" ).draggable({ helper:'clone'});
+        });
+        
+      //mostar ultimo id
+     
    });
     //Crear mesas
 });
+
+var asig_mesas = function(){
+        $.ajax({
+          type:"POST",
+          url:"php/consulta_mesas.php",
+          data: {'cons_mesas': 'cons_mesas'},
+        }).done(function(data){
+          if (data != 0) {
+            var mesas01 = JSON.parse(data);
+            org_mesas(mesas01);
+          };
+
+        });
+}
+
+
+var org_mesas = function(mesas01){
+          
+          for(var i in mesas01){
+           var idtabla = mesas01[i].id;
+                //console.log(idtabla);
+           var id_mesa = mesas01[i].id_mesa;
+               // console.log(id_mesa);
+           var id_restaurante = mesas01[i].id_restaurante;
+               // console.log(id_restaurante);
+           var nombre_mesa = mesas01[i].nombre_mesa;
+                //console.log(nombre_mesa);
+           var id_td = mesas01[i].id_td;
+                //console.log(id_td);
+           var descripcion_mesa = mesas01[i].descripcion_mesa;
+                //console.log(descripcion_mesa);
+                //console.log('--------------------');
+           $("#"+id_td).html('<img id="'+id_mesa+'" class="draggable ui-widget-content" src="images/mesita01.png" alt="">')
+           $( ".draggable" ).draggable({ helper:'clone'});
+          }
+}
 
 
 
