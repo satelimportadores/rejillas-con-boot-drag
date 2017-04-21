@@ -21,19 +21,9 @@ asig_mesas();
                   //modal pedir nombre mesa,descripcion, cant sillas
                       $('#Modal_insertar').modal('show');
                       $('.modal_insertar_title').html('Insertar mesa: '+identificador_mesa+' en: '+id_td);
+                      $('#id_mesa').attr({value: identificador_mesa});
+                      $('#id_td').attr({value: id_td});
                   //modal pedir nombre mesa,descripcion, cant sillas
-              //envio php
-                $.ajax({
-                  url: 'php/e_mesas.php',
-                  type: 'POST',
-                  data: {'insmodmesa':'insmodmesa','id_mesa': identificador_mesa,'id_td':id_td},
-                })
-                .done(function(data) {
-                  console.log(data);
-                })
-
-                
-              //envio php
           }
 //INSERTAR O MODIFICAR MESA
 
@@ -45,9 +35,13 @@ asig_mesas();
     //Borrar mesas
     	 $("#rejilla").on("click", "td img", function() {
           identificador_mesa = $( this ).attr('id');
+          var id_td = $(this).parent().attr('id');
           $('#Modal_borrar').modal('show');
           $('.modal_borrar_title').html('Eliminar mesa');
-            $('.modal_borrar_content').html('Desea eliminar la mesa con id: '+identificador_mesa);
+            $('.modal_borrar_title').html('Desea eliminar la mesa con id: '+identificador_mesa+" Ubicación: "+id_td);
+            $('#id_del_mesa').attr({value: identificador_mesa});
+            $('#id_td_reset').attr({value: id_td});
+
        });
     //Borrar mesas
 
@@ -71,6 +65,41 @@ asig_mesas();
      
    });
     //Crear mesas
+    $("#guardar_mesa").on('click', function() {
+
+       $.ajax({
+                  url: 'php/e_mesas.php',
+                  type: 'POST',
+                  data: $('#form_save_table').serialize(),
+                })
+                .done(function(data) {
+                  console.log(data);
+                  $('#Modal_insertar').modal('hide');
+                  $("#form_save_table")[0].reset(); 
+                })
+      asig_mesas();
+    });
+
+    $("#borrar_mesa").on('click', function() {
+      
+      info = $('#form_delete_table').serialize();
+      console.log(info);
+       $.ajax({
+                  url: 'php/e_mesas.php',
+                  type: 'POST',
+                  data: info,
+                })
+                .done(function(data) {
+                  console.log(data);
+                  $('#Modal_borrar').modal('hide');
+                  var id_td_reset = $('#id_td_reset').val();
+                  $('#'+id_td_reset).html('<img  src="images/fondo_td.png">');
+                  $("#form_delete_table")[0].reset();  
+                })
+       
+                
+    });
+
 
 
 });
@@ -113,6 +142,4 @@ var org_mesas = function(mesas01){
            $( ".draggable" ).draggable({ helper:'clone'});
           }
 }
-
-
 

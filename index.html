@@ -169,26 +169,41 @@
         <h4 class="modal-title modal_insertar_title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body modal_insertar_content">
-        <form class="form-horizontal" action="" role="form">
-        	
-        	
+        <form class="form-horizontal" id="form_save_table" action="" role="form">
+        		
+        		<input type="hidden" name="insmodmesa" value="insmodmesa">
+
+  				<div class="form-group">
+				    <label for="id_mesa" class="col-lg-2 control-label">Identificación de la mesa</label>
+				    <div class="col-lg-10">
+				      <input type="text" class="form-control" readonly="" id="id_mesa" name="id_mesa" value="" >
+				    </div>
+				  </div>
+
+  				<div class="form-group">
+				    <label for="id_td" class="col-lg-2 control-label">Ubicación de la mesa</label>
+				    <div class="col-lg-10">
+				      <input type="text" class="form-control" readonly="" id="id_td" name="id_td" value="" >
+				    </div>
+				  </div>
+
   				<div class="form-group">
 				    <label for="nombre_mesa" class="col-lg-2 control-label">Nombre mesa</label>
 				    <div class="col-lg-10">
-				      <input type="text" class="form-control" id="nombre_mesa" placeholder="nombre de la mesa">
+				      <input type="text" class="form-control" id="nombre_mesa" name="nombre_mesa" placeholder="nombre de la mesa">
 				    </div>
 				  </div>
 				  <div class="form-group">
 				    <label for="desc_mesa" class="col-lg-2 control-label">Descripcion de la mesa</label>
 				    <div class="col-lg-10">
-				      <input type="text" class="form-control" id="desc_mesa" placeholder="Descripcion de la mesa">
+				      <input type="text" class="form-control" id="desc_mesa" name="desc_mesa" placeholder="Descripcion de la mesa">
 				    </div>
 				  </div>
 
 				  <div class="form-group">
 						<label for="numero_sillas" class="col-lg-2 control-label">Cantidad de sillas</label>
 				    <div class="col-lg-offset-2 col-lg-10">
-							<select class="form-control" name="numero_sillas">
+							<select class="form-control" id="numero_sillas" name="numero_sillas">
 							  <option>1</option>
 							  <option>2</option>
 							  <option>3</option>
@@ -202,7 +217,7 @@
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save changes</button>
+		        <button type="button"  id="guardar_mesa" class="btn btn-primary">Save changes</button>
 		      </div>
       </form>
     </div>
@@ -219,12 +234,17 @@
         <h4 class="modal-title modal_borrar_title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body modal_borrar_content">
-        ...
+      <form id="form_delete_table" action="" role="form">
+        <input type="hidden" name="delmodmesa" value="delmodmesa">
+        <input type="hidden" name="id_del_mesa" id="id_del_mesa" value="">
+        <input type="hidden" name="id_td_reset" id="id_td_reset" value="">
+    
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" id="borrar_mesa" class="btn btn-primary">Save changes</button>
+		      </div>
+      </form>
     </div>
   </div>
 </div>
