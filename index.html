@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Rejillas de bootstrap</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
 	  <style>
   #draggable { width: auto; height: auto; padding: 0.5em; }
   #containment-wrapper { width: 100%; height:100%; border:1px solid #ccc; padding: 0,5%; }
@@ -13,8 +14,8 @@
 <body>
 <div class="row">
 	<div id="mesas"	class="col-md-12">
-		<button id="addmesa">agregar mesa</button>
-		
+		<button id="cancelmesa" class="btn btn-danger">cancelar</button>
+		<button id="addmesa" class="btn btn-success">agregar mesa</button>
 	</div>
 </div>
 
@@ -156,8 +157,8 @@
 			</div>
 		</div>
 
-		<div id="content">
-			
+		<div id="loading">
+			cargando ...
 		</div>
 
 <!-- INSERTAR MESA borrar mesa -->
@@ -204,15 +205,15 @@
 						<label for="numero_sillas" class="col-lg-2 control-label">Cantidad de sillas</label>
 				    <div class="col-lg-offset-2 col-lg-10">
 							<select class="form-control" id="numero_sillas" name="numero_sillas">
-							  <option>1</option>
-							  <option>2</option>
-							  <option>3</option>
-							  <option>4</option>
-							  <option>5</option>
+							  <option id="sillas_1">1</option>
+							  <option id="sillas_2">2</option>
+							  <option id="sillas_3">3</option>
+							  <option id="sillas_4">4</option>
+							  <option id="sillas_5">5</option>
 							</select>
 				    </div>
 				  </div>
-
+				<input type="hidden" name="id_td_reset_clone" id="id_td_reset_clone" value="">	
         
 		      </div>
 		      <div class="modal-footer">
@@ -254,5 +255,6 @@
 <script src="js/jqueryUI.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/index.js"></script>
+<script src="js/pace/pace.min.js"></script>
 </body>
 </html>
