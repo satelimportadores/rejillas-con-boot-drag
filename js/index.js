@@ -21,6 +21,7 @@ $('[data-toltip="tooltip"]').tooltip();
             nombre_mesa = $( this ).find('img').attr('data-mesa');
             desc_mesa = $( this ).find('img').attr('data-desc');
             num_sillas_mesa = $( this ).find('img').attr('data-cant-sillas');
+            id_td_cancelar = $( this ).find('img').attr('data-td');
             id_td = $(this).attr('id');
               //console.log(id_td);
                   //modal pedir nombre mesa,descripcion, cant sillas
@@ -28,8 +29,8 @@ $('[data-toltip="tooltip"]').tooltip();
                       $('.modal_insertar_title').html('Insertar mesa: '+identificador_mesa+' en: '+id_td);
                       $('#id_mesa').attr({value: identificador_mesa});
                       $('#id_td').attr({value: id_td});
-                      $('#nombre_mesa').attr({value: nombre_mesa});
-                      $('#desc_mesa').attr({value: desc_mesa});
+                      $('#nombre_mesa').val(nombre_mesa);
+                      $('#desc_mesa').val(desc_mesa);
                       $('#sillas_'+num_sillas_mesa).attr({
                         selected: 'selected'
                       });
@@ -71,9 +72,8 @@ $('[data-toltip="tooltip"]').tooltip();
           data = parseInt(data);
           idmesa = data + 1;
            // alert(idmesa);
-          $("#mesas").append('<img id="'+idmesa+'" class="draggable ui-widget-content mesas" src="images/mesita01.png" alt="">');
+          $("#mesas").append('<img id="'+idmesa+'"  data-mesa="Mesa '+idmesa+'" class="draggable ui-widget-content mesas" src="images/mesita01.png" alt="">');
           $( ".draggable" ).draggable({ helper:'clone'});
-          $('#nombre_mesa').val('Mesa '+idmesa);
           $('#desc_mesa').val('');
           $("#loading").hide(); 
           $("#addmesa").hide();
@@ -93,6 +93,14 @@ $('[data-toltip="tooltip"]').tooltip();
    });
 //Cancelar crear mesas
 
+//Boton cancel MODAL insertar
+   $("#guardar_mesa_cancel").on('click',function() {
+      revertid_mesa = $("#id_mesa").val();
+      $("#"+revertid_mesa).draggable({ revert: "true" })
+   });
+
+//Boton cancel MODAL insertar
+
 // AJAX guardar_mesas
     $("#guardar_mesa").on('click', function() {
       $("#loading").show();
@@ -107,8 +115,7 @@ $('[data-toltip="tooltip"]').tooltip();
                   $("#loading").hide();
                   $("#addmesa").show();
                   $("#cancelmesa").hide();
-                  $('#nombre_mesa').val('');
-                  $('#desc_mesa').val('');
+                  asig_mesas();
                 })
     });
 // AJAX guardar_mesas
@@ -126,20 +133,28 @@ $('[data-toltip="tooltip"]').tooltip();
                 .done(function(data) {
                   console.log(data);
                   $('#Modal_borrar').modal('hide');
-                  var id_td_reset = $('#id_td_reset').val();
-                  $('#'+id_td_reset).html('<img  src="images/fondo_td.png">');
-                   
+                  asig_mesas();
                 })
        
                 
     });
 // AJAX borrar_mesas
 
+    $('#guardar_mesa_cancel').on('click', function() {
+      asig_mesas();
+      $("#addmesa").show();
+      $("#cancelmesa").hide();
+    });
+
 
 });
 
 
 //FUNCIONES:
+
+var cancelar_td = function(){
+  asig_mesas();
+}
 
 var asig_mesas = function(){
         $.ajax({
@@ -149,6 +164,7 @@ var asig_mesas = function(){
         }).done(function(data){
           if (data != 0) {
             var mesas01 = JSON.parse(data);
+            $('td').html('<img  src="images/fondo_td.png">');
             org_mesas(mesas01);
           };
 
@@ -174,7 +190,8 @@ var org_mesas = function(mesas01){
                     //console.log(descripcion_mesa);
                 var cant_sillas_mesa = mesas01[i].cant_sillas_mesa;
                     //console.log('--------------------');
-               $("#"+id_td).html('<img id="'+id_mesa+'" data-toltip="tooltip" title="'+nombre_mesa+'" class="draggable ui-widget-content mesas" src="images/mesita01.png" data-mesa="'+nombre_mesa+'" data-desc="'+descripcion_mesa+'" data-cant-sillas="'+cant_sillas_mesa+'" alt="'+nombre_mesa+'">')
+
+               $("#"+id_td).html('<img id="'+id_mesa+'" data-toltip="tooltip" title="'+nombre_mesa+'" class="draggable ui-widget-content mesas" data-td="'+id_td+'" src="images/mesita01.png" data-mesa="'+nombre_mesa+'" data-desc="'+descripcion_mesa+'" data-cant-sillas="'+cant_sillas_mesa+'" alt="'+nombre_mesa+'">')
                $( ".draggable" ).draggable({ helper:'clone'});
 
           }
