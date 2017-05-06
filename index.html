@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
 	<title>Rejillas de bootstrap</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
@@ -13,20 +14,25 @@
 </head>
 <body>
 <div class="row">
-	<div id="mesas"	class="col-md-12">
+	<div id="mesas"	class="col-md-6 col-xs-6">
 		<button id="cancelmesa" class="btn btn-danger">cancelar</button>
 		<button id="addmesa" class="btn btn-success">agregar mesa</button>
+	</div>
+	<div class="col-md-6 col-xs-6">
+		<select name="piso" id="piso">
+			
+		</select>
 	</div>
 </div>
 
 
 
 		<div class="row" style="border:solid 1px">
-			<div id="containment-wrapper" class="col-md-12" style="border:solid green 1px">
+			<div id="containment-wrapper" class="col-md-12 table-responsive" style="border:solid green 1px">
 
 			 
 
-				<table id="rejilla" class="table table-bordered">
+				<table id="rejilla" class="table table-bordered ">
 					<tr>
 						<td id="1"><img  src="images/fondo_td.png"></td>
 						<td id="2"><img  src="images/fondo_td.png"></td>
@@ -256,5 +262,6 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/index.js"></script>
 <script src="js/pace/pace.min.js"></script>
+<script src="js/jquery.ui.touch-punch.min.js"></script>
 </body>
 </html>

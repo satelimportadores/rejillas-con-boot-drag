@@ -1,10 +1,29 @@
 
-
+/// CAMBIO LA FUNCION DE ASIG_MESAS PONIENDOLE EL PARAMETRO PISO, Y LAS CONSULTAS SE FILTRAN POR LA VARIABLE $PISO
 $(document).ready(function() {
  var idmesa; 
+ var piso = 0;
+
+  $.ajax({
+      url: 'php/consulta_mesas.php',
+      type: 'POST',
+      data: {pisos: 'pisos'},
+    })
+    .done(function(data) {
+      data = JSON.parse(data);
+      for (var i = data.length - 1; i >= 0; i--) {
+        $("#piso").append("<option value='"+data[i]['id_piso']+"'> Piso "+data[i]['id_piso']+"</option>")
+      }         
+    })
+$("#piso").on('change', function() {
+  piso = $("#piso").val();
+  asig_mesas(piso);
+});
+
+
 $("#cancelmesa").hide();
 $("#loading").hide();   
-asig_mesas();
+asig_mesas(piso);
 $('[data-toltip="tooltip"]').tooltip();
 //Celda recibe dropable
 	$("td").droppable({
@@ -67,7 +86,7 @@ $('[data-toltip="tooltip"]').tooltip();
         $.ajax({
           type:"POST",
           url:"php/consulta_mesas.php",
-          data: {'cons_id_mesas': 'cons_id_mesas'},
+          data: {'cons_id_mesas': 'cons_id_mesas','piso': piso},
         }).done(function(data){
           data = parseInt(data);
           idmesa = data + 1;
@@ -115,7 +134,7 @@ $('[data-toltip="tooltip"]').tooltip();
                   $("#loading").hide();
                   $("#addmesa").show();
                   $("#cancelmesa").hide();
-                  asig_mesas();
+                  asig_mesas(piso);
                 })
     });
 // AJAX guardar_mesas
@@ -133,15 +152,21 @@ $('[data-toltip="tooltip"]').tooltip();
                 .done(function(data) {
                   console.log(data);
                   $('#Modal_borrar').modal('hide');
-                  asig_mesas();
+                  asig_mesas(piso);
                 })
        
                 
     });
 // AJAX borrar_mesas
+    
+
+   
+    
+
+
 
     $('#guardar_mesa_cancel').on('click', function() {
-      asig_mesas();
+      asig_mesas(piso);
       $("#addmesa").show();
       $("#cancelmesa").hide();
     });
@@ -153,19 +178,21 @@ $('[data-toltip="tooltip"]').tooltip();
 //FUNCIONES:
 
 var cancelar_td = function(){
-  asig_mesas();
+  asig_mesas(piso);
 }
 
-var asig_mesas = function(){
+var asig_mesas = function(piso){
+        
         $.ajax({
           type:"POST",
           url:"php/consulta_mesas.php",
-          data: {'cons_mesas': 'cons_mesas'},
+          data: {'cons_mesas': 'cons_mesas','piso': piso},
         }).done(function(data){
           if (data != 0) {
             var mesas01 = JSON.parse(data);
             $('td').html('<img  src="images/fondo_td.png">');
             org_mesas(mesas01);
+            validar();
           };
 
         });
@@ -177,17 +204,17 @@ var org_mesas = function(mesas01){
           for(var i in mesas01){
 
                var idtabla = mesas01[i].id;
-                    //console.log(idtabla);
+                    console.log(idtabla);
                var id_mesa = mesas01[i].id_mesa;
-                   // console.log(id_mesa);
+                    console.log(id_mesa);
                var id_restaurante = mesas01[i].id_restaurante;
-                   // console.log(id_restaurante);
+                    console.log(id_restaurante);
                var nombre_mesa = mesas01[i].nombre_mesa;
-                    //console.log(nombre_mesa);
+                   console.log(nombre_mesa);
                var id_td = mesas01[i].id_td;
-                    //console.log(id_td);
+                    console.log(id_td);
                var descripcion_mesa = mesas01[i].descripcion_mesa;
-                    //console.log(descripcion_mesa);
+                   console.log(descripcion_mesa);
                 var cant_sillas_mesa = mesas01[i].cant_sillas_mesa;
                     //console.log('--------------------');
 
@@ -197,3 +224,23 @@ var org_mesas = function(mesas01){
           }
 }
 
+//Valida que Hayan Espacios Vacios
+var validar = function(){
+$.ajax({
+      url: 'php/consulta_mesas.php',
+      type: 'POST',
+      data: {conteo: 'conteo'},
+    })
+    .done(function(data) {
+      console.log(data);
+      var nFilas = $("#rejilla tr").length;
+      var nColumnas = $("#rejilla tr:last td").length;
+      var nEspacio = nFilas * nColumnas;
+      if (nEspacio<=data) {
+        $("#addmesa").attr("disabled", true);
+      }else{
+        $("#addmesa").attr("disabled", false);
+      }
+    })
+}
+//Valida que Hayan Espacios Vacios
