@@ -19,7 +19,7 @@
 		<button id="addmesa" class="btn btn-success">agregar mesa</button>
 	</div>
 	<div class="col-md-6 col-xs-6">
-		<select name="piso" id="piso">
+		<select id="piso">
 			
 		</select>
 	</div>
@@ -179,6 +179,7 @@
         <form class="form-horizontal" id="form_save_table" action="" role="form">
         		
         		<input type="hidden" name="insmodmesa" value="insmodmesa">
+        		<input type="hidden" id="pisoform" name="piso">
 
   				<div class="form-group">
 				    <label for="id_mesa" class="col-lg-2 control-label">Identificación de la mesa</label>
@@ -242,6 +243,7 @@
       </div>
       <div class="modal-body modal_borrar_content">
       <form id="form_delete_table" action="" role="form">
+      	<input type="hidden" id="pisoformdel" name="pisodel">
         <input type="hidden" name="delmodmesa" value="delmodmesa">
         <input type="hidden" name="id_del_mesa" id="id_del_mesa" value="">
         <input type="hidden" name="id_td_reset" id="id_td_reset" value="">

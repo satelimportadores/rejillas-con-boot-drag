@@ -123,13 +123,14 @@ $('[data-toltip="tooltip"]').tooltip();
 // AJAX guardar_mesas
     $("#guardar_mesa").on('click', function() {
       $("#loading").show();
+      $("#pisoform").val(piso);
        $.ajax({
                   url: 'php/e_mesas.php',
                   type: 'POST',
                   data: $('#form_save_table').serialize(),
                 })
                 .done(function(data) {
-                  console.log(data);
+                  console.log("||||||||||||||"+data);
                   $('#Modal_insertar').modal('hide');            
                   $("#loading").hide();
                   $("#addmesa").show();
@@ -141,7 +142,7 @@ $('[data-toltip="tooltip"]').tooltip();
 
 // AJAX borrar_mesas
     $("#borrar_mesa").on('click', function() {
-      
+      $("#pisoformdel").val(piso);
       info = $('#form_delete_table').serialize();
       console.log(info);
        $.ajax({
@@ -229,7 +230,7 @@ var validar = function(){
 $.ajax({
       url: 'php/consulta_mesas.php',
       type: 'POST',
-      data: {conteo: 'conteo'},
+      data: {conteo: 'conteo',piso: piso},
     })
     .done(function(data) {
       console.log(data);

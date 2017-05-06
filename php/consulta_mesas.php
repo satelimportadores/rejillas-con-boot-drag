@@ -26,7 +26,7 @@
     	//consultar id  mesas
     	if (isset($_REQUEST['cons_id_mesas'])) {
        	  $con_mesas = new Conexion;
-          $sql01 = "SELECT MAX(id_mesa) as idultimo FROM restaurapp_design_table WHERE id_piso = 1 and id_restaurante = 1";
+          $sql01 = "SELECT MAX(id_mesa) as idultimo FROM restaurapp_design_table WHERE id_restaurante = 1";
           $Rcon_mesas = $con_mesas->query($sql01) or trigger_error($con_mesas->error);
 
            $data = $Rcon_mesas->fetch_array();
@@ -43,8 +43,9 @@
 
       //conteo de mesas
       if (isset($_REQUEST['conteo'])) {
+          $piso = $_REQUEST['piso'];
           $con_mesas = new Conexion;
-          $sql01 = "SELECT id_mesa FROM restaurapp_design_table WHERE id_piso = 1 and id_restaurante = 1";
+          $sql01 = "SELECT id_mesa FROM restaurapp_design_table WHERE id_piso = $piso and id_restaurante = 1";
           $Rcon_mesas = $con_mesas->query($sql01) or trigger_error($con_mesas->error);
 
            $data = $Rcon_mesas->num_rows;
@@ -58,7 +59,7 @@
 
       if (isset($_REQUEST['pisos'])) {
           $con_mesas = new Conexion;
-          $sql01 = "SELECT DISTINCT(id_piso) FROM restaurapp_design_table WHERE id_restaurante = 1";
+          $sql01 = "SELECT DISTINCT(id_piso) FROM restaurapp_design_table WHERE id_restaurante = 1 order by id_piso desc";
           $Rcon_mesas = $con_mesas->query($sql01) or trigger_error($con_mesas->error);
 
            while($data = $Rcon_mesas->fetch_array()){

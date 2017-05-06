@@ -13,15 +13,13 @@
           $numero_sillas = $_REQUEST['numero_sillas'];
           $id_restaurante = 1;
           $id_piso = $_REQUEST['piso'];
-
-          echo $piso;
-
+          
           $cons_mesa = new Conexion;
-          $sql01 = "SELECT id_mesa FROM restaurapp_design_table WHERE id_piso = $piso and id_restaurante = 1 and id_mesa = \"$id_mesa\"";
+          $sql01 = "SELECT id_mesa FROM restaurapp_design_table WHERE id_piso = $id_piso and id_restaurante = 1 and id_mesa = \"$id_mesa\"";
           $Rcons_mesa = $cons_mesa->query($sql01) or trigger_error($cons_mesa->error);
           $Ncons_mesa = $Rcons_mesa->num_rows;
           if ($Ncons_mesa != 0) {
-            $sql02 = "UPDATE restaurapp_design_table SET id_td = \"$id_td\", descripcion_mesa = \"$desc_mesa\",nombre_mesa = \"$nombre_mesa\", cant_sillas_mesa = \"$numero_sillas\" WHERE id_piso = $piso and  id_restaurante = 1 and id_mesa = \"$id_mesa\"";
+            $sql02 = "UPDATE restaurapp_design_table SET id_td = \"$id_td\", descripcion_mesa = \"$desc_mesa\",nombre_mesa = \"$nombre_mesa\", cant_sillas_mesa = \"$numero_sillas\" WHERE id_piso = $id_piso and  id_restaurante = 1 and id_mesa = \"$id_mesa\"";
           }else{  
             $sql02 = "INSERT INTO restaurapp_design_table (id_restaurante,id_piso,id_mesa,id_td,descripcion_mesa,nombre_mesa,cant_sillas_mesa) VALUES (\"$id_restaurante\",\"$id_piso\",\"$id_mesa\",\"$id_td\",\"$desc_mesa\",\"$nombre_mesa\",\"$numero_sillas\")";
           }
@@ -45,11 +43,11 @@
     if (isset($_REQUEST['delmodmesa'])) {
 
       $id_mesa = $_REQUEST['id_del_mesa'];
-
+      $id_piso = $_REQUEST['pisodel'];
 //borrar mesa
               
               $del_mesa = new Conexion;
-              $sql01 = "DELETE FROM restaurapp_design_table WHERE id_piso = $piso and id_restaurante = 1 and id_mesa = \"$id_mesa\"";
+              $sql01 = "DELETE FROM restaurapp_design_table WHERE id_piso = $id_piso and id_restaurante = 1 and id_mesa = \"$id_mesa\"";
               $Rdel_mesa = $del_mesa->query($sql01) or trigger_error($del_mesa->error);
               if ($Rdel_mesa) {
                 echo 'Mesa Borrada';
