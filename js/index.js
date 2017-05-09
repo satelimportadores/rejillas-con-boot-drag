@@ -1,7 +1,7 @@
 
 /// CAMBIO LA FUNCION DE ASIG_MESAS PONIENDOLE EL PARAMETRO PISO, Y LAS CONSULTAS SE FILTRAN POR LA VARIABLE $PISO
 $(document).ready(function() {
-
+ 
  var idmesa; 
  var piso = 0;
 
@@ -49,16 +49,18 @@ $('[data-toltip="tooltip"]').tooltip();
               //console.log(id_td);
                   //modal pedir nombre mesa,descripcion, cant sillas
                       $('#Modal_insertar').modal('show');
+                      $('.modal-header').show();
                       $('.modal_insertar_title').html('Insertar mesa: '+identificador_mesa+' en: '+id_td);
                       $('#id_mesa').attr({value: identificador_mesa});
                       $('#id_td').attr({value: id_td});
                       $('#nombre_mesa').val(nombre_mesa);
                       $('#desc_mesa').val(desc_mesa);
-                      $('#sillas_'+num_sillas_mesa).attr({
-                        selected: 'selected'
+                      $("option[id ^= sillas_]").attr({
+                        selected: false
                       });
-                      
-                      
+                      $('#sillas_'+num_sillas_mesa).attr({
+                        selected: true
+                      });                 
                   //modal pedir nombre mesa,descripcion, cant sillas
           }
 //INSERTAR O MODIFICAR MESA
@@ -74,7 +76,8 @@ $('[data-toltip="tooltip"]').tooltip();
           var id_td = $(this).parent().attr('id');
           $('#Modal_borrar').modal('show');
           $('.modal_borrar_title').html('Eliminar mesa');
-            $('.modal_borrar_title').html('Desea eliminar la mesa con id: '+identificador_mesa+" Ubicación: "+id_td);
+            $('.modal-header').hide();
+            $('.modal_borrar_content').html('<h3>Desea eliminar la mesa con id: '+identificador_mesa+" Ubicación: "+id_td+"</h3>")
             $('#id_del_mesa').attr({value: identificador_mesa});
             $('#id_td_reset').attr({value: id_td});
 

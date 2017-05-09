@@ -30,8 +30,9 @@
 			<div id="containment-wrapper" class="col-md-12 table-responsive" style="border:solid green 1px">
 
 			 
-
+				
 				<table id="rejilla" class="table table-bordered ">
+					<div class="hidden-md hidden-lg"><h1>&nbsp;</h1></div>
 					<tr>
 						<td id="1"><img  src="images/fondo_td.png"></td>
 						<td id="2"><img  src="images/fondo_td.png"></td>
@@ -158,6 +159,7 @@
 						<td id="107"><img  src="images/fondo_td.png"></td>
 						<td id="108"><img  src="images/fondo_td.png"></td>
 					</tr>
+					
 				</table>
 			</div>
 		</div>
@@ -174,42 +176,42 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title modal_insertar_title" id="myModalLabel">Modal title</h4>
       </div>
+      <form id="form_save_table" action="" role="form">
       <div class="modal-body modal_insertar_content">
-        <form class="form-horizontal" id="form_save_table" action="" role="form">
-        		
+
+        		<div class="form-group">
         		<input type="hidden" name="insmodmesa" value="insmodmesa">
         		<input type="hidden" id="pisoform" name="piso">
+				</div>	
 
   				<div class="form-group">
-				    <label for="id_mesa" class="col-lg-2 control-label">Identificación de la mesa</label>
-				    <div class="col-lg-10">
-				      <input type="text" class="form-control" readonly="" id="id_mesa" name="id_mesa" value="" >
-				    </div>
-				  </div>
+				    <label for="id_mesa">Identificación de la mesa</label>
+				    <input type="text" class="form-control" readonly="" id="id_mesa" name="id_mesa" value="" > 
+				</div>
 
   				<div class="form-group">
-				    <label for="id_td" class="col-lg-2 control-label">Ubicación de la mesa</label>
-				    <div class="col-lg-10">
+				    <label for="id_td">Ubicación de la mesa</label>
+				    
 				      <input type="text" class="form-control" readonly="" id="id_td" name="id_td" value="" >
-				    </div>
+				    
 				  </div>
 
   				<div class="form-group">
-				    <label for="nombre_mesa" class="col-lg-2 control-label">Nombre mesa</label>
-				    <div class="col-lg-10">
+				    <label for="nombre_mesa">Nombre mesa</label>
+				    
 				      <input type="text" class="form-control" id="nombre_mesa" name="nombre_mesa" placeholder="nombre de la mesa">
-				    </div>
+				    
 				  </div>
 				  <div class="form-group">
-				    <label for="desc_mesa" class="col-lg-2 control-label">Descripcion de la mesa</label>
-				    <div class="col-lg-10">
+				    <label for="desc_mesa">Descripcion de la mesa</label>
+				    
 				      <input type="text" class="form-control" id="desc_mesa" name="desc_mesa" placeholder="Descripcion de la mesa">
-				    </div>
+				    
 				  </div>
 
 				  <div class="form-group">
-						<label for="numero_sillas" class="col-lg-2 control-label">Cantidad de sillas</label>
-				    <div class="col-lg-offset-2 col-lg-10">
+						<label for="numero_sillas">Cantidad de sillas</label>
+				    
 							<select class="form-control" id="numero_sillas" name="numero_sillas">
 							  <option id="sillas_1">1</option>
 							  <option id="sillas_2">2</option>
@@ -217,7 +219,7 @@
 							  <option id="sillas_4">4</option>
 							  <option id="sillas_5">5</option>
 							</select>
-				    </div>
+				   
 				  </div>
 				<input type="hidden" name="id_td_reset_clone" id="id_td_reset_clone" value="">	
         
